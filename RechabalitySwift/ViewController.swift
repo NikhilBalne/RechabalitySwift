@@ -10,9 +10,16 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    let network: NetworkManager = NetworkManager.sharedInstance
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+                
+        network.reachability.whenUnreachable = { reachability in
+            let offlineVC = self.storyboard?.instantiateViewController(identifier: "OfflineViewController")
+            self.navigationController?.pushViewController(offlineVC!, animated: true)
+        }
+        
     }
 
 

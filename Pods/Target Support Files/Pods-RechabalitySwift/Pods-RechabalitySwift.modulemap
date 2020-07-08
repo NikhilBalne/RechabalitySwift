@@ -1,0 +1,6 @@
+framework module Pods_RechabalitySwift {
+  umbrella header "Pods-RechabalitySwift-umbrella.h"
+
+  export *
+  module * { export * }
+}
