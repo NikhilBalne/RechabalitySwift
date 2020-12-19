@@ -15,10 +15,7 @@ class OfflineViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        network.reachability.whenReachable = { reachability in
-            self.navigationController?.popViewController(animated: true)
-        }
-
+        showMainViewController()
         
     }
     
@@ -30,6 +27,14 @@ class OfflineViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.navigationBar.isHidden = false
+    }
+    
+    private func showMainViewController() -> Void {
+        network.reachability.whenReachable = { reachability in
+            DispatchQueue.main.async {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
     }
     
 }

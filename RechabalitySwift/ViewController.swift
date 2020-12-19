@@ -15,13 +15,19 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
                 
-        network.reachability.whenUnreachable = { reachability in
-            let offlineVC = self.storyboard?.instantiateViewController(identifier: "OfflineViewController")
-            self.navigationController?.pushViewController(offlineVC!, animated: true)
-        }
+        showOfflinePage()
         
     }
 
+    private func showOfflinePage() -> Void {
+        
+        network.reachability.whenUnreachable = { reachability in
+            DispatchQueue.main.async {
+                let offlineVC = self.storyboard?.instantiateViewController(identifier: "OfflineViewController")
+                self.navigationController?.pushViewController(offlineVC!, animated: true)
+            }
+        }
+    }
 
 }
 
